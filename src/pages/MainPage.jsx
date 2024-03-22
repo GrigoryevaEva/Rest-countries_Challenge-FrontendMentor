@@ -1,39 +1,56 @@
 import { useState, useEffect } from "react";
-import { Link, useLoaderData } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../features/countries/countriesSlice";
+import { useUpdateEffect } from "../hooks/useUpdateEffect";
+import { resetStore } from "../features/country/countrySlice";
 
 const MainPage = () => {
-  const [api, data] = useLoaderData()
+  const dispatch = useDispatch()
 
-  const [dataPage, setDataPage] = useState(data);
-  const [currentDataRegion, setCurrentDataRegion] = useState(dataPage);
-
-  const [region, setRegion] = useState('Filter by Region');
-  const [tmpValueInput, setTmpValueInput] = useState('');
-  const [valueInput, setValueInput] = useState('');
+  const data = useSelector(getData)
+  const searchData = useSelector(state => state.countries.resultSearchFilter)
+  const countriesStatus = useSelector(state => state.countries.status)
+  const inputValue = useSelector(state => state.countries.inputBy)
+  const error = useSelector(state => state.countries.error)
+  
+  const [region, setRegion] = useState('all');
+  const [tmpInputValue, setTmpValueInput] = useState('');
 
   useEffect(() => {
-    if (region != 'Filter by Region') {
-      const initData = async () => {
-        let resp = await api.getListByRegion(region)
-        setDataPage(resp)
-        setCurrentDataRegion(resp)
-      };
-      initData();
-    } else {
-      setDataPage(data)
-      setCurrentDataRegion(dataPage)
+    dispatch(resetStore())
+  }, [])
+
+  useEffect(() => {
+    if (countriesStatus === 'idle') {
+      dispatch(fetchCountries())
     }
+  }, [countriesStatus, dispatch])
+
+  useUpdateEffect(() => {
+    if (region !== 'all') {
+      dispatch(fetchRegion(region))
+    } else {
+      dispatch(fetchCountries())
+    }
+    if (inputValue) dispatch(inputBy(''))
   }, [region])
 
-  useEffect(() => {
-    if (valueInput) {
-      let countries = dataPage.filter((country) => {
-        let countryName = country.name.common
-        return countryName.includes(valueInput)
-      })
-      setDataPage(countries)
+  useUpdateEffect(() => {
+    if (inputValue) {
+      dispatch(searchFilter(true))
+    } else {
+      dispatch(searchFilter(false))
     }
-  }, [valueInput])
+  }, [inputValue])
+
+  const showData = () => {
+    if (searchData) {
+      return searchData
+    } else {
+      return data
+    }
+  }
 
   const handleChangeRegion = (event) => {
     setRegion(event.target.value);
@@ -46,8 +63,7 @@ const MainPage = () => {
   const handelSubmit = (event) => {
     event.preventDefault();
 
-    setDataPage(currentDataRegion)
-    setValueInput(ucFirst(tmpValueInput))
+    dispatch(inputBy(ucFirst(tmpInputValue)))
   }
 
   const handelKeyDown = (event) => {
@@ -57,7 +73,7 @@ const MainPage = () => {
   }
 
   const convertPopulation = (num) => {
-    return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(num)
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
   }
 
   function ucFirst(str) {
@@ -66,18 +82,50 @@ const MainPage = () => {
     return str[0].toUpperCase() + str.slice(1);
   }
 
+  let content
+
+  if (countriesStatus === 'loading') {
+
+    content = <p>Loading...</p>
+
+  } else if (countriesStatus === 'succeeded') {
+
+    content = showData().map((item) => (
+      <Link 
+      className="country-list__country" 
+      key={item.cca3}
+      to={`/${item.cca3}`}>
+      
+        <div>
+          <img src={item.flags.png} alt=""></img>
+        </div>
+
+        <div>
+          <h2>{item.name.common}</h2>
+          <p>Population: {convertPopulation(item.population)}</p>
+          <p>Region: {item.region}</p>
+          <p>Capital: {item.capital}</p>
+        </div>
+      </Link>
+    ))
+
+  } else if (countriesStatus === 'failed') {
+
+    content = <p>{error}</p>
+
+  }
+
   return (
     <main>
       <div className="container">
         <form className="navigation-country" onSubmit={handelSubmit}>
 
           <input key={region} onChange={handleInputChange} onKeyDown={handelKeyDown} className="navigation-country__search" type="text" placeholder="Search for a country..."></input>
-          <button>Yes</button>
 
           <select onChange={handleChangeRegion} className="navigation-country__filter" name="regions" id="filter-by-region">
-            <option value="Filter by Region">Filter by Region</option>
+            <option value="all">Filter by Region</option>
             <option value="Africa">Africa</option>
-            <option value="America">America</option>
+            <option value="Americas">America</option>
             <option value="Asia">Asia</option>
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
@@ -85,23 +133,7 @@ const MainPage = () => {
         </form>
         
         <div className="country-list">
-          {dataPage.map((item) => (
-            <Link 
-            className="country-list__country" 
-            key={item.cca3}
-            to={`/${item.cca3}`}>
-            
-              <div>
-                <img src={item.flags.png} alt=""></img>
-              </div>
-              <div>
-                <h2>{item.name.common}</h2>
-                <p>Population: {convertPopulation(item.population)}</p>
-                <p>Region: {item.region}</p>
-                <p>Capital: {item.capital}</p>
-              </div>
-            </Link>
-          ))}
+          {content}
         </div>
       </div>
     </main>
