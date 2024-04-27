@@ -5,6 +5,9 @@ import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../
 import { useUpdateEffect } from "../hooks/useUpdateEffect";
 import { resetStore } from "../features/country/countrySlice";
 
+import iconDt from '../assets/loupe-dt.svg'
+import iconLt from '../assets/loupe-lt.svg'
+
 const MainPage = () => {
   const dispatch = useDispatch()
 
@@ -13,6 +16,8 @@ const MainPage = () => {
   const countriesStatus = useSelector(state => state.countries.status)
   const inputValue = useSelector(state => state.countries.inputBy)
   const error = useSelector(state => state.countries.error)
+
+  const theme = useSelector((state) => state.theme)
   
   const [region, setRegion] = useState('all');
   const [tmpInputValue, setTmpValueInput] = useState('');
@@ -94,17 +99,17 @@ const MainPage = () => {
       <Link 
       className="country-list__country" 
       key={item.cca3}
-      to={`/${item.cca3}`}>
-      
-        <div>
+      to={`/${item.cca3}`}
+      >
+        <div className="country-list__container-flag">
           <img src={item.flags.png} alt=""></img>
         </div>
 
-        <div>
+        <div className="country-list__container-info">
           <h2>{item.name.common}</h2>
-          <p>Population: {convertPopulation(item.population)}</p>
-          <p>Region: {item.region}</p>
-          <p>Capital: {item.capital}</p>
+          <p><span>Population:</span> {convertPopulation(item.population)}</p>
+          <p><span>Region:</span> {item.region}</p>
+          <p><span>Capital:</span> {item.capital}</p>
         </div>
       </Link>
     ))
@@ -116,11 +121,18 @@ const MainPage = () => {
   }
 
   return (
-    <main>
+    <main className="main-page">
       <div className="container">
         <form className="navigation-country" onSubmit={handelSubmit}>
 
+          <div className="navigation-country__input">
+          {theme === 'dark' ? 
+          <button><img src={iconDt} alt=""></img></button> : 
+          <button><img src={iconLt} alt=""></img></button>
+          }
+          
           <input key={region} onChange={handleInputChange} onKeyDown={handelKeyDown} className="navigation-country__search" type="text" placeholder="Search for a country..."></input>
+          </div>
 
           <select onChange={handleChangeRegion} className="navigation-country__filter" name="regions" id="filter-by-region">
             <option value="all">Filter by Region</option>

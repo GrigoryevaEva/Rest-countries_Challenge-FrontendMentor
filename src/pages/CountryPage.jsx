@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getData, fetchCountry, fetchCountryBorders, resetStore } from '../features/country/countrySlice';
 
+import iconDt from '../assets/shape-dt.svg'
+import iconLt from '../assets/shape-lt.svg'
+
 const CountryPage = () => {
   const dispatch = useDispatch()
 
@@ -10,6 +13,8 @@ const CountryPage = () => {
   const countryBorders = useSelector(state => state.country.countryBorders)
   const countryStatus = useSelector(state => state.country.status)
   const error = useSelector(state => state.country.error)
+
+  const theme = useSelector((state) => state.theme)
 
   const { countryCode } = useParams()
 
@@ -59,34 +64,46 @@ const CountryPage = () => {
 
     content = data.map((item) => (
       <div className="country" key={item.cca3}>
-        <div>
-          <img className="country__flag" src={item.flags.svg} alt=""></img>
+
+        <div className='country__container-flag'>
+          <img src={item.flags.svg} alt=""></img>
         </div>
-        <div>
-          <div>
-            <h2>{item.name.common}</h2>
-            <p>Native Name: {getNestingObj(item.name.nativeName)}</p>
-            <p>Population: {convertPopulation(item.population)}</p>
-            <p>Region: {item.region}</p>
-            <p>Sub Region: {item.subregion}</p>
-            <p>Capital: {item.capital}</p>
-            <p>Top Level Domain: {item.tld}</p>
-            <p>Currencies: {getNestingObj(item.currencies)}</p>
+        
+        <div className='country__container-info'>
+          <h2>{item.name.common}</h2>
+          <div className='one-five'>
+            <p><span>Native Name:</span> {getNestingObj(item.name.nativeName)}</p>
+            <p><span>Population:</span> {convertPopulation(item.population)}</p>
+            <p><span>Region:</span> {item.region}</p>
+            <p><span>Sub Region:</span> {item.subregion}</p>
+            <p><span>Capital:</span> {item.capital}</p>
+          </div>
+
+          <div className='six-eight'>
+            <p><span>Top Level Domain:</span> {item.tld}</p>
+            <p><span>Currencies:</span> {getNestingObj(item.currencies)}</p>
             <p>
-              Languages: {Object.values(item.languages).join(', ')}
+              <span>Languages:</span> {Object.values(item.languages).join(', ')}
             </p>
           </div>
-          <div>
-            <p>Border Countries:</p>
+
+          <div className='container-border-countries'>
+            <p><span>Border Countries:</span></p>
+            <div>
             {
               countryBorders.map((b) => {
                 if (typeof b === 'string') {
                   return <p key={'notFound'}>Is not Border Countries</p>
                 } else {
-                  return <Link to={`/${b.cca3}`} key={b.cca3} onClick={handleResetStore}>{b.name.common} </Link>
+                  return <Link to={`/${b.cca3}`} key={b.cca3} onClick={handleResetStore}>
+                    <button>
+                    {b.name.common}
+                    </button>
+                  </Link>
                 }
               })
             }
+            </div>
           </div>
         </div>
       </div>
@@ -99,9 +116,17 @@ const CountryPage = () => {
   }
   
   return (
-    <main>
+    <main className='country-page'>
       <div className="container">
-      <Link to={`/`} >Back</Link>
+      <Link to={`/`} >
+        <button className='back-btn'>
+        {theme === 'dark' ? 
+          <img src={iconDt} alt=""></img> : 
+          <img src={iconLt} alt=""></img>
+          }
+        Back
+        </button>
+      </Link>
         {content}
       </div>
     </main>

@@ -1,0 +1,63 @@
+.container {
+  padding: $pdg-container-mobile;
+  @media (min-width: 800px) {
+    padding: $pdg-container-desktop;
+  }
+}
+
+body {
+  background-color: var(--c-bkgc-main);
+  color: var(--c-f-main);
+
+  font-family: 'Nunito Sans';
+  font-size: $txt-sz-info;
+  font-weight: 300;
+
+  h1 {
+    font-size: $txt-sz-h1-mobile;
+    @media (min-width: 700px) {
+      font-size: $txt-sz-h1-desktop;
+    }
+  }
+
+  h2 {
+    font-size: $txt-sz-h2;
+  }
+
+  h3 {
+    font-size: $txt-sz-h3;
+  }
+
+  h1, h2, h3 {
+    font-weight: 800;
+  }
+
+  button {
+    @include btn;
+  }
+
+  span {
+    font-weight: 600;
+  }
+
+  input {
+    color: var(--c-f-main);
+  }
+}
+
+a:-webkit-any-link {
+  color: var(--c-f-main);
+}
+
+::-webkit-input-placeholder { 
+  color: var(--c-f-plch);
+}
+:-moz-placeholder {
+  color: var(--c-f-plch);
+}
+::-moz-placeholder {
+  color: var(--c-f-plch);
+}
+:-ms-input-placeholder {
+  color: var(--c-f-plch);
+}

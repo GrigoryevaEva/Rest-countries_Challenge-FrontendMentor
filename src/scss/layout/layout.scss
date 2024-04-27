@@ -1,0 +1,44 @@
+header {
+  .container {
+    @include flex (row, space-between, center);
+
+    padding: $pdg-container-mobile;
+    
+    @media (min-width: 800px) {
+      padding-top: 1.438rem;
+      padding-bottom: 1.438rem;
+      padding: $pdg-container-desktop;
+    }
+  }
+
+  position: relative;
+
+  background-color: var(--c-bkgc-other);
+
+  box-shadow: $c-shdw-header;
+
+  .toggle-theme {
+    @include flex (row, space-between, center);
+
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0;
+    box-shadow: 0 0 0;
+
+    font-weight: 600;
+    font-size: $txt-sz-swch-th-mobile;
+    @media (min-width: 800px) {
+      font-size: $txt-sz-swch-th-desktop;
+    }
+
+    gap: 0.5rem;
+
+    img {
+      height: 1rem;
+      width: 1rem;
+      @media (min-width: 800px) {
+        height: 1.25rem;
+        width: 1.25rem;
+      }
+    }
+  }
+}

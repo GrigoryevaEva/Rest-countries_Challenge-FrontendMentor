@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import ToggleTheme from '../components/ToggleTheme';
 
 const Layout = () => {
   return (
@@ -6,10 +7,7 @@ const Layout = () => {
       <header>
         <div className="container">
           <h1>Where in the world?</h1>
-          <button>
-            <img src="" alt=""></img>
-            Dark Mode
-          </button>
+          <ToggleTheme />
         </div>
       </header>
       <Outlet />

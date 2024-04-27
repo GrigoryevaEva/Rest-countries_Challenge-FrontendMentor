@@ -1,0 +1,27 @@
+// grid
+
+@mixin flex ($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+@mixin grid ($gtc, $gtr) {
+  display: grid;
+  grid-template-columns: $gtc;
+  grid-template-rows: $gtr;
+}
+
+// buttons
+
+@mixin btn {
+  background-color: var(--c-bkgc-other);
+  color: var(--c-f-main);
+  padding: $pdg-btn;
+  box-shadow: $c-shdw-btn;
+  font-size: $txt-sz-btn-mobile;
+  @media (min-width: 376px) {
+    font-size: $txt-sz-btn-desktop;
+  }
+}

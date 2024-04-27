@@ -5,7 +5,7 @@ import MainPage from './pages/MainPage';
 import CountryPage from './pages/CountryPage';
 import ErrorPage from './pages/ErrorPage';
 
-import "./scss/test.scss";
+import "./index.scss";
 
 
 const router = createBrowserRouter([
