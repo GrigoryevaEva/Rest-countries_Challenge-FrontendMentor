@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 
-import Layout from "./pages/Layout";
-import MainPage from './pages/MainPage';
-import CountryPage from './pages/CountryPage';
-import ErrorPage from './pages/ErrorPage';
+import Layout from "../pages/Layout";
+import MainPage from '../pages/MainPage';
+import CountryPage from '../pages/CountryPage';
+import ErrorPage from '../pages/ErrorPage';
 
 import "./index.scss";
 

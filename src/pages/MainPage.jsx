@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../features/countries/countriesSlice";
-import { useUpdateEffect } from "../hooks/useUpdateEffect";
-import { resetStore } from "../features/country/countrySlice";
 
-import iconDt from '../assets/loupe-dt.svg'
-import iconLt from '../assets/loupe-lt.svg'
+import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../entities/countries/index";
+import { useUpdateEffect } from "../shared/model/hooks/index";
+import { resetStore } from "../entities/country/index";
+
+import iconDt from '../shared/ui/loupe-dt.svg'
+import iconLt from '../shared/ui/loupe-lt.svg'
 
 const MainPage = () => {
   const dispatch = useDispatch()

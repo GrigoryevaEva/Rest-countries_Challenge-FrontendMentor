@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getData, fetchCountry, fetchCountryBorders, resetStore } from '../features/country/countrySlice';
 
-import iconDt from '../assets/shape-dt.svg'
-import iconLt from '../assets/shape-lt.svg'
+import { getData, fetchCountry, fetchCountryBorders, resetStore } from '../entities/country/index';
+
+import iconDt from '../shared/ui/shape-dt.svg'
+import iconLt from '../shared/ui/shape-lt.svg'
 
 const CountryPage = () => {
   const dispatch = useDispatch()

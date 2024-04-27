@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux"
 
-import { set } from '../features/theme/themeSlice'
+import { changeTheme, selectCurrentTheme } from '../../../entities/theme/index'
 
-import iconDt from '../assets/moon-dt.svg'
-import iconLt from '../assets/moon-lt.svg'
+import iconDt from '../../../shared/ui/moon-dt.svg'
+import iconLt from '../../../shared/ui/moon-lt.svg'
 
-const ToggleTheme = () => {
+export const ChangeTheme = () => {
 
-  const theme = useSelector((state) => state.theme)
+  const theme = useSelector(selectCurrentTheme)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const ToggleTheme = () => {
     localStorage.setItem('theme', theme)
   }, [ theme ])
 
-  const handleChange = () => dispatch(set(theme === 'dark' ? 'light' : 'dark'))
+  const handleChange = () => dispatch(changeTheme(theme === 'dark' ? 'light' : 'dark'))
 
   let icon;
   let textButton;
@@ -38,5 +38,3 @@ const ToggleTheme = () => {
     </button>
   )
 }
-
-export default ToggleTheme

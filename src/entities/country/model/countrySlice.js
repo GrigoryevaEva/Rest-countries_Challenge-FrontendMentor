@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import Api from "../../api/CountryApi";
+import Api from "../../../shared/api/CountryApi";
 
 const api = new Api('https://restcountries.com/v3.1')
 
@@ -15,7 +15,7 @@ export const fetchCountryBorders = createAsyncThunk('country/FetchCountryBorders
   return resp
 });
 
-export const countrySlice = createSlice({
+const countrySlice = createSlice({
   name: 'country',
   initialState: {
     country: [],

@@ -16,10 +16,12 @@ const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    set: (state, action) => action.payload,
+    changeTheme: (state, action) => action.payload,
   }
 });
 
-export const { set } = themeSlice.actions
+export const selectCurrentTheme = (state) => state.theme
+
+export const { changeTheme } = themeSlice.actions
 
 export default themeSlice.reducer

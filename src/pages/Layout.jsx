@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import ToggleTheme from '../components/ToggleTheme';
+
+import { ChangeTheme } from '../features/changeTheme/index';
 
 const Layout = () => {
   return (
@@ -7,7 +8,7 @@ const Layout = () => {
       <header>
         <div className="container">
           <h1>Where in the world?</h1>
-          <ToggleTheme />
+          <ChangeTheme />
         </div>
       </header>
       <Outlet />
