@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/Rest-countries_Challenge-FrontendMentor/static/css/main.58783b75.css",
+    "main.js": "/Rest-countries_Challenge-FrontendMentor/static/js/main.ccb9d48c.js",
+    "index.html": "/Rest-countries_Challenge-FrontendMentor/index.html",
+    "static/media/loupe-lt.svg": "/Rest-countries_Challenge-FrontendMentor/static/media/loupe-lt.5d29def6a2f382f56802fbedd3200937.svg",
+    "static/media/loupe-dt.svg": "/Rest-countries_Challenge-FrontendMentor/static/media/loupe-dt.9d35958461cf1ecffc41a77a1d30a2c4.svg",
+    "static/media/moon-lt.svg": "/Rest-countries_Challenge-FrontendMentor/static/media/moon-lt.5f6d90336a22c25b43abf15546a21fea.svg",
+    "static/media/moon-dt.svg": "/Rest-countries_Challenge-FrontendMentor/static/media/moon-dt.669a6e50fdca0ac668b67299ab296399.svg",
+    "static/media/shape-lt.svg": "/Rest-countries_Challenge-FrontendMentor/static/media/shape-lt.77558f7075dda44dbfe1b298e68a0b81.svg",
+    "static/media/shape-dt.svg": "/Rest-countries_Challenge-FrontendMentor/static/media/shape-dt.a455f8956cb740e0bd21d0a05e898e36.svg",
+    "main.58783b75.css.map": "/Rest-countries_Challenge-FrontendMentor/static/css/main.58783b75.css.map",
+    "main.ccb9d48c.js.map": "/Rest-countries_Challenge-FrontendMentor/static/js/main.ccb9d48c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58783b75.css",
+    "static/js/main.ccb9d48c.js"
+  ]
+}
