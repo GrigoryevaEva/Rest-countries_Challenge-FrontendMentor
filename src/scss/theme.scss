@@ -1,0 +1,13 @@
+:root[data-theme="light"] {
+  --c-bkgc-main: #FAFAFA;
+  --c-bkgc-other: #FFFFFF;
+  --c-f-main: #111517;
+  --c-f-plch: #C4C4C4;
+}
+
+:root[data-theme="dark"] {
+  --c-bkgc-main: #202C36;
+  --c-bkgc-other: #2B3844;
+  --c-f-main: #FFFFFF;
+  --c-f-plch: #FFFFFF;
+}
