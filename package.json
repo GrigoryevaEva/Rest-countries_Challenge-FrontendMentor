@@ -1,7 +1,7 @@
 {
   "name": "rest-countries-api",
   "version": "0.1.0",
-  "homepage": "https://grigoryevaeva.github.io",
+  "homepage": "https://grigoryevaeva.github.io/Rest-countries_Challenge-FrontendMentor/", 
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
