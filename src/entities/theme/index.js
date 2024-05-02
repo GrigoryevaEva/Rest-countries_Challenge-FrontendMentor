@@ -1,5 +1,8 @@
 export { 
   default as themeReducer, 
-  changeTheme, 
-  selectCurrentTheme
+  changeTheme
  } from './model/themeSlice'
+
+ export { 
+  selectCurrentTheme
+ } from './model/selectors'

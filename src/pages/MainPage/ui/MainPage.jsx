@@ -2,7 +2,20 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
-import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../../../entities/countries/index";
+import { 
+  fetchCountries, 
+  fetchRegion, 
+  searchFilter, 
+  inputBy,
+  selectData,
+  selectStatus,
+  selectError,
+  selectResultSearchFilter,
+  selectInputBy
+} from "../../../entities/countries/index";
+
+import { selectCurrentTheme } from "../../../entities/theme/index";
+
 import { useUpdateEffect } from "../../../shared/model/hooks/index";
 import { resetStore } from "../../../entities/country/index";
 import { convertPopulation, ucFirst } from "../../../shared/model/functions/index";
@@ -13,13 +26,13 @@ import iconLt from '../../../shared/ui/loupe-lt.svg'
 export const MainPage = () => {
   const dispatch = useDispatch()
 
-  const data = useSelector(getData)
-  const searchData = useSelector(state => state.countries.resultSearchFilter)
-  const countriesStatus = useSelector(state => state.countries.status)
-  const inputValue = useSelector(state => state.countries.inputBy)
-  const error = useSelector(state => state.countries.error)
+  const data = useSelector(selectData)
+  const searchData = useSelector(selectResultSearchFilter)
+  const countriesStatus = useSelector(selectStatus)
+  const inputValue = useSelector(selectInputBy)
+  const error = useSelector(selectError)
 
-  const theme = useSelector((state) => state.theme)
+  const theme = useSelector(selectCurrentTheme)
   
   const [region, setRegion] = useState('all');
   const [tmpInputValue, setTmpValueInput] = useState('');

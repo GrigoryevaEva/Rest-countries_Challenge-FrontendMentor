@@ -2,7 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { getData, fetchCountry, fetchCountryBorders, resetStore } from '../../../entities/country/index';
+import { 
+  fetchCountry, 
+  fetchCountryBorders, 
+  resetStore,
+  selectData,
+  selectStatus,
+  selectError,
+  selectCountryBorders
+} from '../../../entities/country/index';
+
+import { selectCurrentTheme } from "../../../entities/theme/index";
+
 import { convertPopulation, getNestingObj } from "../../../shared/model/functions/index";
 
 import iconDt from '../../../shared/ui/shape-dt.svg'
@@ -11,12 +22,12 @@ import iconLt from '../../../shared/ui/shape-lt.svg'
 export const CountryPage = () => {
   const dispatch = useDispatch()
 
-  const data = useSelector(getData)
-  const countryBorders = useSelector(state => state.country.countryBorders)
-  const countryStatus = useSelector(state => state.country.status)
-  const error = useSelector(state => state.country.error)
+  const data = useSelector(selectData)
+  const countryBorders = useSelector(selectCountryBorders)
+  const countryStatus = useSelector(selectStatus)
+  const error = useSelector(selectError)
 
-  const theme = useSelector((state) => state.theme)
+  const theme = useSelector(selectCurrentTheme)
 
   const { countryCode } = useParams()
 

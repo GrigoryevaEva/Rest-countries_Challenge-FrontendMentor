@@ -1,7 +1,13 @@
 export { 
   default as countryReducer, 
-  getData, 
   resetStore, 
   fetchCountry, 
   fetchCountryBorders
  } from './model/countrySlice'
+
+ export { 
+  selectData,
+  selectStatus,
+  selectError,
+  selectCountryBorders
+ } from './model/selectors'

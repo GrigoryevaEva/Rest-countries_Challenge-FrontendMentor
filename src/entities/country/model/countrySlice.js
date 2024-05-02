@@ -49,8 +49,6 @@ const countrySlice = createSlice({
   },
 })
 
-export const getData = state => state.country.country
-
 export const { actions, reducer } = countrySlice
 
 export const { resetStore } = actions

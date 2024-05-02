@@ -55,8 +55,6 @@ const countriesSlice = createSlice({
   },
 })
 
-export const getData = state => state.countries.countries
-
 export const { actions, reducer } = countriesSlice
 
 export const { inputBy, searchFilter } = actions

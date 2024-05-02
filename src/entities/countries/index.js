@@ -1,8 +1,15 @@
 export { 
   default as countriesReducer, 
-  getData, 
   inputBy, 
   searchFilter, 
   fetchCountries, 
   fetchRegion
  } from './model/countriesSlice'
+
+ export { 
+  selectData,
+  selectStatus,
+  selectError,
+  selectResultSearchFilter,
+  selectInputBy
+ } from './model/selectors'
