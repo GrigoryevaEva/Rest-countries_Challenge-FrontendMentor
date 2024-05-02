@@ -22,6 +22,8 @@ const themeSlice = createSlice({
 
 export const selectCurrentTheme = (state) => state.theme
 
-export const { changeTheme } = themeSlice.actions
+export const { actions, reducer } = themeSlice
+
+export const { changeTheme } = actions
 
 export default themeSlice.reducer
