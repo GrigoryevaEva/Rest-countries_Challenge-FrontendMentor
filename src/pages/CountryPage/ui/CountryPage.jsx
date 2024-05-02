@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { getData, fetchCountry, fetchCountryBorders, resetStore } from '../entities/country/index';
+import { getData, fetchCountry, fetchCountryBorders, resetStore } from '../../../entities/country/index';
+import { convertPopulation, getNestingObj } from "../../../shared/model/functions/index";
 
-import iconDt from '../shared/ui/shape-dt.svg'
-import iconLt from '../shared/ui/shape-lt.svg'
+import iconDt from '../../../shared/ui/shape-dt.svg'
+import iconLt from '../../../shared/ui/shape-lt.svg'
 
-const CountryPage = () => {
+export const CountryPage = () => {
   const dispatch = useDispatch()
 
   const data = useSelector(getData)
@@ -37,22 +38,6 @@ const CountryPage = () => {
 
   const handleResetStore = () => {
     dispatch(resetStore())
-  }
-
-  const convertPopulation = (num) => {
-    return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(num)
-  }
-
-  const getNestingObj = (obj) => {
-    let result = '';
-    for (let key in obj) {
-      for (let k in obj[key]) {
-        result = obj[key][k]
-        break
-      }
-      break
-    }
-    return result
   }
 
   let content
@@ -133,5 +118,3 @@ const CountryPage = () => {
     </main>
   );
 }
-
-export default CountryPage;

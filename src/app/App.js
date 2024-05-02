@@ -1,9 +1,9 @@
 import { createHashRouter, RouterProvider} from 'react-router-dom';
 
-import Layout from "../pages/Layout";
-import MainPage from '../pages/MainPage';
-import CountryPage from '../pages/CountryPage';
-import ErrorPage from '../pages/ErrorPage';
+import { Layout } from "../pages/Layout/index";
+import { MainPage } from '../pages/MainPage/index';
+import { CountryPage } from '../pages/CountryPage/index';
+import { ErrorPage } from '../pages/ErrorPage/index';
 
 import "./index.scss";
 

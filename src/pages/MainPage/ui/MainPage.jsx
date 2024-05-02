@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
-import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../entities/countries/index";
-import { useUpdateEffect } from "../shared/model/hooks/index";
-import { resetStore } from "../entities/country/index";
+import { fetchCountries, fetchRegion, getData, searchFilter, inputBy } from "../../../entities/countries/index";
+import { useUpdateEffect } from "../../../shared/model/hooks/index";
+import { resetStore } from "../../../entities/country/index";
+import { convertPopulation, ucFirst } from "../../../shared/model/functions/index";
 
-import iconDt from '../shared/ui/loupe-dt.svg'
-import iconLt from '../shared/ui/loupe-lt.svg'
+import iconDt from '../../../shared/ui/loupe-dt.svg'
+import iconLt from '../../../shared/ui/loupe-lt.svg'
 
-const MainPage = () => {
+export const MainPage = () => {
   const dispatch = useDispatch()
 
   const data = useSelector(getData)
@@ -76,16 +77,6 @@ const MainPage = () => {
     if (event.key === 'Enter') {
       return true
     }
-  }
-
-  const convertPopulation = (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  }
-
-  function ucFirst(str) {
-    if (!str) return str;
-  
-    return str[0].toUpperCase() + str.slice(1);
   }
 
   let content

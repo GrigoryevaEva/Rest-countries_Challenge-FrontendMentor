@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
-import { ChangeTheme } from '../features/changeTheme/index';
+import { ChangeTheme } from '../../../features/changeTheme/index';
 
-const Layout = () => {
+export const Layout = () => {
   return (
     <>
       <header>
@@ -15,5 +15,3 @@ const Layout = () => {
     </>
   )
 }
-
-export default Layout;
