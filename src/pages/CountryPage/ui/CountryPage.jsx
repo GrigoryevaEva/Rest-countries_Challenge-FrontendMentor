@@ -32,7 +32,7 @@ export const CountryPage = () => {
   const { countryCode } = useParams()
 
   useEffect(() => {
-    dispatch(resetStore())
+    if (countryStatus != 'idle') dispatch(resetStore())
   }, [])
   
   useEffect(() => {

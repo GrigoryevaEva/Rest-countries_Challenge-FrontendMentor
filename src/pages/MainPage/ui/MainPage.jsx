@@ -14,6 +14,8 @@ import {
   selectInputBy
 } from "../../../entities/countries/index";
 
+import { selectStatus as selectCountryStatus } from "../../../entities/country/index";
+
 import { selectCurrentTheme } from "../../../entities/theme/index";
 
 import { useUpdateEffect } from "../../../shared/model/hooks/index";
@@ -32,13 +34,15 @@ export const MainPage = () => {
   const inputValue = useSelector(selectInputBy)
   const error = useSelector(selectError)
 
+  const countryStatus = useSelector(selectCountryStatus)
+
   const theme = useSelector(selectCurrentTheme)
   
   const [region, setRegion] = useState('all');
   const [tmpInputValue, setTmpValueInput] = useState('');
 
   useEffect(() => {
-    dispatch(resetStore())
+    if (countryStatus != 'idle') dispatch(resetStore())
   }, [])
 
   useEffect(() => {
