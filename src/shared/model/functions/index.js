@@ -1,5 +1,6 @@
 export {
   convertPopulation,
   ucFirst,
-  getNestingObj
+  getNestingObj,
+  showContent
 } from './functions'

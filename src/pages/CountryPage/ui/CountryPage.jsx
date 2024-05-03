@@ -14,7 +14,7 @@ import {
 
 import { selectCurrentTheme } from "../../../entities/theme/index";
 
-import { convertPopulation, getNestingObj } from "../../../shared/model/functions/index";
+import { convertPopulation, getNestingObj, showContent } from "../../../shared/model/functions/index";
 
 import iconDt from '../../../shared/ui/shape-dt.svg'
 import iconLt from '../../../shared/ui/shape-lt.svg'
@@ -51,66 +51,52 @@ export const CountryPage = () => {
     dispatch(resetStore())
   }
 
-  let content
+  const contentCountry = data.map((item) => (
+    <div className="country" key={item.cca3}>
 
-  if (countryStatus === 'loading') {
-
-    content = <p>Loading...</p>
-
-  } else if (countryStatus === 'succeeded') {
-
-    content = data.map((item) => (
-      <div className="country" key={item.cca3}>
-
-        <div className='country__container-flag'>
-          <img src={item.flags.svg} alt=""></img>
+      <div className='country__container-flag'>
+        <img src={item.flags.svg} alt=""></img>
+      </div>
+      
+      <div className='country__container-info'>
+        <h2>{item.name.common}</h2>
+        <div className='one-five'>
+          <p><span>Native Name:</span> {getNestingObj(item.name.nativeName)}</p>
+          <p><span>Population:</span> {convertPopulation(item.population)}</p>
+          <p><span>Region:</span> {item.region}</p>
+          <p><span>Sub Region:</span> {item.subregion}</p>
+          <p><span>Capital:</span> {item.capital}</p>
         </div>
-        
-        <div className='country__container-info'>
-          <h2>{item.name.common}</h2>
-          <div className='one-five'>
-            <p><span>Native Name:</span> {getNestingObj(item.name.nativeName)}</p>
-            <p><span>Population:</span> {convertPopulation(item.population)}</p>
-            <p><span>Region:</span> {item.region}</p>
-            <p><span>Sub Region:</span> {item.subregion}</p>
-            <p><span>Capital:</span> {item.capital}</p>
-          </div>
 
-          <div className='six-eight'>
-            <p><span>Top Level Domain:</span> {item.tld}</p>
-            <p><span>Currencies:</span> {getNestingObj(item.currencies)}</p>
-            <p>
-              <span>Languages:</span> {Object.values(item.languages).join(', ')}
-            </p>
-          </div>
+        <div className='six-eight'>
+          <p><span>Top Level Domain:</span> {item.tld}</p>
+          <p><span>Currencies:</span> {getNestingObj(item.currencies)}</p>
+          <p>
+            <span>Languages:</span> {Object.values(item.languages).join(', ')}
+          </p>
+        </div>
 
-          <div className='container-border-countries'>
-            <p><span>Border Countries:</span></p>
-            <div>
-            {
-              countryBorders.map((b) => {
-                if (typeof b === 'string') {
-                  return <p key={'notFound'}>Is not Border Countries</p>
-                } else {
-                  return <Link to={`/${b.cca3}`} key={b.cca3} onClick={handleResetStore}>
-                    <button>
-                    {b.name.common}
-                    </button>
-                  </Link>
-                }
-              })
-            }
-            </div>
+        <div className='container-border-countries'>
+          <p><span>Border Countries:</span></p>
+          <div>
+          {
+            countryBorders.map((b) => {
+              if (typeof b === 'string') {
+                return <p key={'notFound'}>Is not Border Countries</p>
+              } else {
+                return <Link to={`/${b.cca3}`} key={b.cca3} onClick={handleResetStore}>
+                  <button>
+                  {b.name.common}
+                  </button>
+                </Link>
+              }
+            })
+          }
           </div>
         </div>
       </div>
-    ))
-
-  } else if (countryStatus === 'failed') {
-
-    content = <p>{error}</p>
-
-  }
+    </div>
+  ))
   
   return (
     <main className='country-page'>
@@ -124,7 +110,9 @@ export const CountryPage = () => {
         Back
         </button>
       </Link>
-        {content}
+        {
+          showContent(countryStatus, error, contentCountry)
+        }
       </div>
     </main>
   );

@@ -19,3 +19,13 @@ export const getNestingObj = (obj) => {
   }
   return result
 }
+
+export const showContent = (status, error, content) => {
+  if (status === 'loading') {
+    return <p>Loading...</p>
+  } else if (status === 'succeeded') {
+    return content
+  } else if (status === 'failed') {
+    return <p>{error}</p>
+  }
+}

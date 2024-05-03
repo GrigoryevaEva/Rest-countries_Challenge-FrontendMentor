@@ -20,7 +20,7 @@ import { selectCurrentTheme } from "../../../entities/theme/index";
 
 import { useUpdateEffect } from "../../../shared/model/hooks/index";
 import { resetStore } from "../../../entities/country/index";
-import { convertPopulation, ucFirst } from "../../../shared/model/functions/index";
+import { convertPopulation, ucFirst, showContent } from "../../../shared/model/functions/index";
 
 import iconDt from '../../../shared/ui/loupe-dt.svg'
 import iconLt from '../../../shared/ui/loupe-lt.svg'
@@ -96,38 +96,24 @@ export const MainPage = () => {
     }
   }
 
-  let content
+  const content = showData().map((item) => (
+    <Link 
+    className="country-list__country" 
+    key={item.cca3}
+    to={`/${item.cca3}`}
+    >
+      <div className="country-list__container-flag">
+        <img src={item.flags.png} alt=""></img>
+      </div>
 
-  if (countriesStatus === 'loading') {
-
-    content = <p>Loading...</p>
-
-  } else if (countriesStatus === 'succeeded') {
-
-    content = showData().map((item) => (
-      <Link 
-      className="country-list__country" 
-      key={item.cca3}
-      to={`/${item.cca3}`}
-      >
-        <div className="country-list__container-flag">
-          <img src={item.flags.png} alt=""></img>
-        </div>
-
-        <div className="country-list__container-info">
-          <h2>{item.name.common}</h2>
-          <p><span>Population:</span> {convertPopulation(item.population)}</p>
-          <p><span>Region:</span> {item.region}</p>
-          <p><span>Capital:</span> {item.capital}</p>
-        </div>
-      </Link>
-    ))
-
-  } else if (countriesStatus === 'failed') {
-
-    content = <p>{error}</p>
-
-  }
+      <div className="country-list__container-info">
+        <h2>{item.name.common}</h2>
+        <p><span>Population:</span> {convertPopulation(item.population)}</p>
+        <p><span>Region:</span> {item.region}</p>
+        <p><span>Capital:</span> {item.capital}</p>
+      </div>
+    </Link>
+  ))
 
   return (
     <main className="main-page">
@@ -154,7 +140,9 @@ export const MainPage = () => {
         </form>
         
         <div className="country-list">
-          {content}
+          {
+            showContent(countriesStatus, error, content)
+          }
         </div>
       </div>
     </main>
