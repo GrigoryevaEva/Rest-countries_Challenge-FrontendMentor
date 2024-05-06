@@ -14,7 +14,7 @@ import {
 
 import { selectCurrentTheme } from "../../../entities/theme/index";
 
-import { convertPopulation, getNestingObj, showContent } from "../../../shared/model/functions/index";
+import { convertPopulation, showContent } from "../../../shared/model/functions/index";
 
 import iconDt from '../../../shared/ui/shape-dt.svg'
 import iconLt from '../../../shared/ui/shape-lt.svg'
@@ -32,7 +32,7 @@ export const CountryPage = () => {
   const { countryCode } = useParams()
 
   useEffect(() => {
-    if (countryStatus != 'idle') dispatch(resetStore())
+    if (countryStatus !== 'idle') dispatch(resetStore())
   }, [])
   
   useEffect(() => {
@@ -61,7 +61,7 @@ export const CountryPage = () => {
       <div className='country__container-info'>
         <h2>{item.name.common}</h2>
         <div className='one-five'>
-          <p><span>Native Name:</span> {getNestingObj(item.name.nativeName)}</p>
+          <p><span>Native Name:</span> {Object.values(item.name.nativeName)[0].official}</p>
           <p><span>Population:</span> {convertPopulation(item.population)}</p>
           <p><span>Region:</span> {item.region}</p>
           <p><span>Sub Region:</span> {item.subregion}</p>
@@ -70,7 +70,7 @@ export const CountryPage = () => {
 
         <div className='six-eight'>
           <p><span>Top Level Domain:</span> {item.tld}</p>
-          <p><span>Currencies:</span> {getNestingObj(item.currencies)}</p>
+          <p><span>Currencies:</span> {Object.keys(item.currencies).join(', ')}</p>
           <p>
             <span>Languages:</span> {Object.values(item.languages).join(', ')}
           </p>

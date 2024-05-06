@@ -8,18 +8,6 @@ export const ucFirst = (str) => {
   return str[0].toUpperCase() + str.slice(1);
 }
 
-export const getNestingObj = (obj) => {
-  let result = '';
-  for (let key in obj) {
-    for (let k in obj[key]) {
-      result = obj[key][k]
-      break
-    }
-    break
-  }
-  return result
-}
-
 export const showContent = (status, error, content) => {
   if (status === 'loading') {
     return <p>Loading...</p>

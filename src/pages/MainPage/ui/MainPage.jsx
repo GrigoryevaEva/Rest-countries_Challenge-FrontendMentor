@@ -42,7 +42,7 @@ export const MainPage = () => {
   const [tmpInputValue, setTmpValueInput] = useState('');
 
   useEffect(() => {
-    if (countryStatus != 'idle') dispatch(resetStore())
+    if (countryStatus !== 'idle') dispatch(resetStore())
   }, [])
 
   useEffect(() => {
@@ -71,9 +71,8 @@ export const MainPage = () => {
   const showData = () => {
     if (searchData) {
       return searchData
-    } else {
-      return data
     }
+    return data
   }
 
   const handleChangeRegion = (event) => {
