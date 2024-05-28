@@ -64,10 +64,10 @@ My solution:
 </div>
 
   Light theme:
-  - [Desktop main page]('screenshots/desktop-home-light.jpg')
-  - [Mobile main page]('screenshots/mobile-home-light.jpg')
-  - [Desktop detail page]('screenshots/desktop-detail-light.jpg')
-  - [Mobile detail page]('screenshots/mobile-detail-light.jpg')
+  - [Desktop main page]('screenshots/desktop-home-light.png')
+  - [Mobile main page]('screenshots/mobile-home-light.png')
+  - [Desktop detail page]('screenshots/desktop-detail-light.png')
+  - [Mobile detail page]('screenshots/mobile-detail-light.png')
 
 ### Links
 
